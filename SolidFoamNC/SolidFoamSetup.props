@@ -1,23 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ImportGroup Label="PropertySheets" />
+  
   <PropertyGroup Label="UserMacros">
     <QT_DIR>C:\Qt\6.9.3\msvc2022_64</QT_DIR>
+    <NCadSDK>D:\NanoCAD_SDK</NCadSDK>
   </PropertyGroup>
-  <PropertyGroup />
+
+  <PropertyGroup>
+    <TargetExt>.nrx</TargetExt>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+
   <ItemDefinitionGroup>
     <ClCompile>
       <AdditionalOptions>/Zc:__cplusplus /permissive- /Zc:twoPhase- /wd4596 /utf-8 /wd4828 %(AdditionalOptions)</AdditionalOptions>
-      <AdditionalIncludeDirectories>$(QT_DIR)\inlcude;$(QT_DIR)\include\QtWidgets;$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      
+      <PreprocessorDefinitions>NCAD;_WIN32_IE=0x0600;WIN;WIN32;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES=1;_CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      
+      <AdditionalIncludeDirectories>$(NCadSDK)\include\arxgate;$(NCadSDK)\include;$(NCadSDK)\include-$(Platform);$(NCadSDK)\include-$(Platform)\Drawing\ActiveX;$(NCadSDK)\include-$(Platform)\Drawing\ActiveX\OdaX;$(NCadSDK)\include\MAPI;$(NCadSDK)\include\nrxgate;$(NCadSDK)\include\nrxdbgate;$(NCadSDK)\include\nrxhostgate;$(NCadSDK)\include\nrxuigate;$(NCadSDK)\include\nrxpropsgate;$(QT_DIR)\include;$(QT_DIR)\include\QtWidgets;$(QT_DIR)\include\QtCore;$(QT_DIR)\include\QtGui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
     </ClCompile>
     <Link>
-      <AdditionalLibraryDirectories>$(QT_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>Qt6Core.lib;Qt6Gui.lib;Qt6Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(NCadSDK)\lib-$(Platform);$(NCadSDK)\lib-$(Platform)\TD;$(SolutionDir)\bin-$(Platform)\$(Configuration);$(QT_DIR)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      
+      <OutputFile>$(OutDir)$(ProjectName)$(TargetExt)</OutputFile>
+      <SubSystem>Windows</SubSystem>
+      
+      <AdditionalDependencies>nrxdbgate.lib;nrxhostgate.lib;nrxuigate.lib;nrxgatemgd.lib;nrxpropsgate.lib;mcgel.lib;hostopm.lib;Qt6Core.lib;Qt6Gui.lib;Qt6Widgets.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
+
   <ItemGroup>
     <BuildMacro Include="QT_DIR">
       <Value>$(QT_DIR)</Value>
+    </BuildMacro>
+    <BuildMacro Include="NCadSDK">
+      <Value>$(NCadSDK)</Value>
     </BuildMacro>
   </ItemGroup>
 </Project>
