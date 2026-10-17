@@ -1,0 +1,22 @@
+# Visual Studio
+.vs/
+*.user
+*.aps
+*.ncb
+*.suo
+*.sdf
+*.opensdf
+*.db
+
+# Build results
+x64/
+x86/
+Debug/
+Release/
+*.obj
+*.exe
+*.dll
+*.pdb
+*.ilk
+*.lib
+*.exp
